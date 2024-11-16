@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>蓝桥dfs好题 | 自身就是太阳</title><meta name="author" content="自身"><meta name="copyright" content="自身"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="分析： 对于dfs  关键是搜索函数如何写，先思考出口，本题的关键就是从左上走到右下，同时注意要求每一个格子都要经过一次，那么也就是说步数一定是n*n-1  时才能结束函数。  与此同时要求的限制条件就是   首先这个格子只能走一次，其次不能越界  再一个就是 必须按照规则从0-k-1的序列走  最后就是不能出现交叉的情况  12345678910111213141516171819202122">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蓝桥dfs好题">
+<meta property="og:url" content="https://zis-sun.github.io/zisun/2024/11/16/%E8%93%9D%E6%A1%A5dfs%E5%A5%BD%E9%A2%98/index.html">
+<meta property="og:site_name" content="自身就是太阳">
+<meta property="og:description" content="分析： 对于dfs  关键是搜索函数如何写，先思考出口，本题的关键就是从左上走到右下，同时注意要求每一个格子都要经过一次，那么也就是说步数一定是n*n-1  时才能结束函数。  与此同时要求的限制条件就是   首先这个格子只能走一次，其次不能越界  再一个就是 必须按照规则从0-k-1的序列走  最后就是不能出现交叉的情况  12345678910111213141516171819202122">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zis-sun.github.io/zisun/img/zis.jpg">
+<meta property="article:published_time" content="2024-11-16T14:09:02.000Z">
+<meta property="article:modified_time" content="2024-11-16T14:38:17.568Z">
+<meta property="article:author" content="自身">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zis-sun.github.io/zisun/img/zis.jpg"><link rel="shortcut icon" href="/zisun/img/zis.jpg"><link rel="canonical" href="https://zis-sun.github.io/zisun/2024/11/16/%E8%93%9D%E6%A1%A5dfs%E5%A5%BD%E9%A2%98/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/zisun/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/zisun/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '蓝桥dfs好题',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/zisun/"><span class="site-name">自身就是太阳</span></a><a class="nav-page-title" href="/zisun/"><span class="site-name">蓝桥dfs好题</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">蓝桥dfs好题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-16T14:09:02.000Z" title="发表于 2024-11-16 22:09:02">2024-11-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-16T14:38:17.568Z" title="更新于 2024-11-16 22:38:17">2024-11-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><img src="D:\360MoveData\Users\29050\Desktop\hexo\source_posts\assets{4F25B91F-4CF2-4DD5-A69E-56E224AC5AA8}.png" alt="{4F25B91F-4CF2-4DD5-A69E-56E224AC5AA8}"></p>
+<p>分析：</p>
+<p>对于dfs  关键是搜索函数如何写，先思考出口，本题的关键就是从左上走到右下，同时注意要求每一个格子都要经过一次，那么也就是说步数一定是n*n-1  时才能结束函数。  与此同时要求的限制条件就是   首先这个格子只能走一次，其次不能越界  再一个就是 必须按照规则从0-k-1的序列走  最后就是不能出现交叉的情况 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">#define N 12</span><br><span class="line">//输入</span><br><span class="line">int n, k;</span><br><span class="line">//起点终点</span><br><span class="line">int qx = 0, qy = 0, zx, zy;</span><br><span class="line">//地图</span><br><span class="line">int g[N][N];</span><br><span class="line">//标记没标记过</span><br><span class="line">int f[N][N];</span><br><span class="line">//这个点走的方向</span><br><span class="line">int fx[N][N];</span><br><span class="line">//记录方向用的</span><br><span class="line">int bu[N * N];</span><br><span class="line">//方向</span><br><span class="line">int dx[8] = &#123;-1, -1, 0, 1, 1, 1, 0, -1&#125;;</span><br><span class="line">int dy[8] = &#123;0, 1, 1, 1, 0, -1, -1, -1&#125;;</span><br><span class="line">//有没有结果</span><br><span class="line">int res = 0;</span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">void otto() &#123;</span><br><span class="line">    for (int i = 0; i &lt; n * n - 1; ++i)</span><br><span class="line">        cout &lt;&lt; bu[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//搜索</span><br><span class="line">void dfs(int x, int y, int bus, int zt) &#123;</span><br><span class="line">    //已经找到结果了，不找了</span><br><span class="line">    if (res == 1)</span><br><span class="line">        return;</span><br><span class="line">    //坐标正确，步数正确，允许输出</span><br><span class="line">    if (x == zx &amp;&amp; y == zy &amp;&amp; bus == n * n - 1) &#123;</span><br><span class="line">        //标记为找到</span><br><span class="line">        res = 1;</span><br><span class="line">        //调用函数把结果打出来</span><br><span class="line">        otto();</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    //循环走方格</span><br><span class="line">    if (zt == k - 1)</span><br><span class="line">        zt = -1;</span><br><span class="line">    //八个方向，顺时针就不用管字典序</span><br><span class="line">    for (int i = 0; i &lt; 8; ++i) &#123;</span><br><span class="line">        //一个新的点的俩坐标</span><br><span class="line">        int vx = x + dx[i];</span><br><span class="line">        int vy = y + dy[i];</span><br><span class="line">        //标记 错号 出界</span><br><span class="line">        if (f[vx][vy] || g[vx][vy] != zt + 1 || x &lt; 0 || y &lt; 0 || x &gt;= n || y &gt;= n)</span><br><span class="line">            continue;</span><br><span class="line">        //如果会交叉</span><br><span class="line">        if (i == 1 &amp;&amp; (fx[x][y + 1] == 7 || fx[x - 1][y] == 3))</span><br><span class="line">            continue;</span><br><span class="line">        if (i == 3 &amp;&amp; (fx[x][y + 1] == 5 || fx[x + 1][y] == 1))</span><br><span class="line">            continue;</span><br><span class="line">        if (i == 5 &amp;&amp; (fx[x][y - 1] == 3 || fx[x + 1][y] == 7))</span><br><span class="line">            continue;</span><br><span class="line">        if (i == 7 &amp;&amp; (fx[x][y - 1] == 1 || fx[x - 1][y] == 5))</span><br><span class="line">            continue;</span><br><span class="line">        //开搜</span><br><span class="line">        f[vx][vy] = 1;</span><br><span class="line">        fx[x][y] = i;</span><br><span class="line">        bu[bus] = i;</span><br><span class="line">        dfs(vx, vy, bus + 1, g[vx][vy]);</span><br><span class="line">        bu[bus] = -1;</span><br><span class="line">        fx[x][y] = -1;</span><br><span class="line">        f[vx][vy] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    //输入</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    zx = n - 1, zy = n - 1;</span><br><span class="line">    for (int i = 0; i &lt; n; ++i)</span><br><span class="line">        for (int j = 0; j &lt; n; ++j)</span><br><span class="line">            cin &gt;&gt; g[i][j];</span><br><span class="line">    //初始化一些数据</span><br><span class="line">    memset(fx, -1, sizeof fx);//方向</span><br><span class="line">    memset(f, 0, sizeof f);//是否走过</span><br><span class="line">    memset(bu, -1, sizeof bu);//步数也就是路径</span><br><span class="line">    //起点标成走过</span><br><span class="line">    f[qx][qy] = 1;</span><br><span class="line">    //我搜搜搜</span><br><span class="line">    dfs(qx, qy, 0, 0);//  从起点开始走  步数为0   然后序列的起点为0</span><br><span class="line">    //没找到   //res  作为是否找到标志</span><br><span class="line">    if (!res)</span><br><span class="line">        cout &lt;&lt; -1 &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>同时要注意当我走的位置的序列值为k-1的时候必须特判一下将 zt&#x3D;-1  原因就是k-1的下一步一定是0</p>
+<p>对于交叉情况的判断，首先举个例子  当一个上方和左方的点都走过了，那么此时就不能往左上走了，这样就交叉了</p>
+<p>换成代码语言实现就是，我们开一个fx【N】【N】  数组，每走一步，我们都将fx标记其方向，如果说当我往左上走的时候发现f【x】【y+1】往左下走过或者说f【x-1】【y】往右上走过，那么就不能走了，走了就交叉了。其他也同理。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://zis-sun.github.io/zisun">自身</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://zis-sun.github.io/zisun/2024/11/16/%E8%93%9D%E6%A1%A5dfs%E5%A5%BD%E9%A2%98/">https://zis-sun.github.io/zisun/2024/11/16/%E8%93%9D%E6%A1%A5dfs%E5%A5%BD%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://zis-sun.github.io/zisun" target="_blank">自身就是太阳</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/zisun/img/zis.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/zisun/2024/11/16/first-blog/" title="first blog"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">first blog</div></div><div class="info-2"><div class="info-item-1">demo2这是李志升第一篇博客 </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/zisun/img/zis.jpg" onerror="this.onerror=null;this.src='/zisun/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">自身</div><div class="author-info-description"></div><div class="site-data"><a href="/zisun/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/zisun/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/zisun/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZIS-SUN"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/zisun/2024/11/16/%E8%93%9D%E6%A1%A5dfs%E5%A5%BD%E9%A2%98/" title="蓝桥dfs好题">蓝桥dfs好题</a><time datetime="2024-11-16T14:09:02.000Z" title="发表于 2024-11-16 22:09:02">2024-11-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/zisun/2024/11/16/first-blog/" title="first blog">first blog</a><time datetime="2024-11-16T11:46:55.000Z" title="发表于 2024-11-16 19:46:55">2024-11-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/zisun/2024/11/16/demo/" title="demo">demo</a><time datetime="2024-11-16T11:23:44.000Z" title="发表于 2024-11-16 19:23:44">2024-11-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/zisun/2024/11/16/hello-world/" title="Hello World">Hello World</a><time datetime="2024-11-16T11:11:50.822Z" title="发表于 2024-11-16 19:11:50">2024-11-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By 自身</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/zisun/js/utils.js"></script><script src="/zisun/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
